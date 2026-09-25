@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intricon — Builders of considered homes</title>
+  <meta name="description" content="Intricon is a Sydney building company delivering architectural homes, waterfront residences and luxury renovations. Explore our completed work." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0c'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c9a56a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="has-cursor">
+
+  <!-- Preloader: counter + curtain reveal -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__panel preloader__panel--top"></div>
+    <div class="preloader__panel preloader__panel--bottom"></div>
+    <div class="preloader__inner">
+      <div class="preloader__word" id="preloaderWord">INTRICON</div>
+      <div class="preloader__count"><span id="preloaderCount">0</span><sup>%</sup></div>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+    </div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring"><span id="cursorLabel">View</span></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="index.html" aria-label="Intricon home">
+      <span class="brand__mark"><i></i></span>
+      <span>Intricon</span>
+    </a>
+    <div class="topbar__right">
+      <span class="topbar__time" id="localTime" title="Local time, Sydney">Sydney · --:--</span>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+        <span id="menuBtnLabel">Menu</span>
+        <span class="menu-btn__lines"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen overlay menu -->
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <div class="menu__bg" id="menuBg"></div>
+    <div class="menu__inner">
+      <ul class="menu__links" id="menuLinks">
+        <li><a href="#work" data-bg="12"><small>01</small>Work</a></li>
+        <li><a href="#studio" data-bg="10"><small>02</small>Studio</a></li>
+        <li><a href="#services" data-bg="5"><small>03</small>Services</a></li>
+        <li><a href="#process" data-bg="0"><small>04</small>Process</a></li>
+        <li><a href="#contact" data-bg="27"><small>05</small>Contact</a></li>
+      </ul>
+      <div class="menu__side">
+        <h4>Projects</h4>
+        <ul id="menuProjects"></ul>
+        <div class="menu__contact" id="menuContact"></div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero__grid"></div>
+      <div class="hero__aurora"><i></i><i></i><i></i></div>
+      <div class="hero__trail" id="heroTrail"></div>
+
+      <div class="hero__content">
+        <span class="eyebrow eyebrow--noline hero__kicker">Sydney · Est. builders of architectural homes</span>
+        <h1 class="hero__title" id="heroTitle" aria-label="Intricon">INTRICON</h1>
+        <p class="hero__sub">
+          <span>Builders of</span>
+          <span class="flip" id="flipWords" aria-live="polite">
+            <span class="is-in">considered</span>
+            <span>waterfront</span>
+            <span>bespoke</span>
+            <span>enduring</span>
+            <span>light-filled</span>
+          </span>
+          <span>homes.</span>
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--solid magnetic" href="#work"><span>See the work</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          <a class="btn btn--shimmer magnetic" href="project.html?p=beach-st"><i class="btn__dot"></i><span>Latest: 25 Beach Street</span></a>
+        </div>
+      </div>
+
+      <div class="hero__foot">
+        <a class="scroll-cue" href="#work"><i></i><span>Scroll</span></a>
+        <p class="hint hide-touch">Move your cursor across the page to leaf through the latest project.</p>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marqueeA">
+        <span>Architectural new builds<i></i></span>
+        <span>Waterfront residences<i></i></span>
+        <span>Knockdown rebuilds<i></i></span>
+        <span>Luxury renovations<i></i></span>
+        <span>Bespoke joinery<i></i></span>
+        <span>Stone &amp; brass detailing<i></i></span>
+        <span>Owner-supervised sites<i></i></span>
+      </div>
+    </div>
+
+    <!-- ============ WORK INDEX ============ -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-reveal>Selected work</span>
+            <h2 class="display" data-cut>Every home, <span class="serif">in detail.</span></h2>
+          </div>
+          <p class="lede" data-reveal style="--d:160ms">Hover a project to preview it, click to open the full photo record. New jobs are added as they reach handover.</p>
+        </div>
+        <div class="index__list" id="indexList"></div>
+      </div>
+      <div class="index__preview" id="indexPreview" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ HORIZONTAL HIGHLIGHTS ============ -->
+    <section class="hscroll" id="highlights">
+      <div class="hscroll__pin">
+        <div class="hscroll__track" id="hscrollTrack"></div>
+        <div class="hscroll__bar"><i id="hscrollBar"></i></div>
+        <div class="hscroll__count" id="hscrollCount">01 / 08</div>
+      </div>
+    </section>
+
+    <!-- ============ STUDIO / MANIFESTO ============ -->
+    <section class="section manifesto" id="studio">
+      <div class="container">
+        <div class="manifesto__grid">
+          <div>
+            <span class="eyebrow" data-reveal>The studio</span>
+            <p class="reveal-words" id="revealWords" style="margin-top:24px">
+              We are a builder that treats the last five percent of a job as the whole job. The <em>set-out</em> of a stair, the <em>grain</em> of an oak door, the line where stone meets brass — these are the things our clients live with, so they are the things we obsess over.
+            </p>
+          </div>
+          <div class="manifesto__aside">
+            <p data-reveal>Intricon builds architect-designed homes across Sydney. We run one dedicated team per site, we do our own carpentry and set-out, and the director walks every job every week.</p>
+            <p data-reveal style="--d:100ms">The result is a home that photographs beautifully and, more importantly, still feels considered a decade after handover.</p>
+            <div data-reveal style="--d:200ms"><a class="btn btn--light magnetic" href="#contact"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+          </div>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES BENTO ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-reveal>What we do</span>
+            <h2 class="display" data-cut>Built <span class="serif">properly,</span><br>from footing to finish.</h2>
+          </div>
+          <p class="lede" data-reveal style="--d:160ms">One contract, one accountable team. We take architectural drawings and deliver a finished, defect-free home — with the joinery, stone and landscaping resolved by the same people who poured the slab.</p>
+        </div>
+
+        <div class="bento">
+          <article class="spot b-1" data-reveal>
+            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+            <div>
+              <h3>Architectural new builds</h3>
+              <p>Complex, high-specification homes delivered from a set of architect's drawings. We price honestly, program realistically and build to the millimetre.</p>
+              <ul class="spot__list">
+                <li>Structural steel, suspended slabs &amp; cantilevers</li>
+                <li>Full-height glazing and flush thresholds</li>
+                <li>Curved plaster, set-out and in-house carpentry</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="spot spot--img b-2" data-reveal style="--d:80ms">
+            <img id="bentoImg" alt="Brass tapware against stone tile at 25 Beach Street" loading="lazy" />
+            <div class="lens" id="lens" aria-hidden="true"><img id="lensImg" alt="" /></div>
+            <div class="spot__cap">
+              <h3>Detail is the brief</h3>
+              <p>Brass, stone and oak resolved as one palette.</p>
+            </div>
+          </article>
+
+          <article class="spot b-3" data-reveal style="--d:120ms">
+            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg></div>
+            <div>
+              <h3>Renovations &amp; extensions</h3>
+              <p>Opening up, adding a level or rebuilding behind a heritage façade — with the same finish standard as a new build.</p>
+            </div>
+          </article>
+
+          <article class="spot spot--stone b-4" data-reveal style="--d:160ms">
+            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></div>
+            <div>
+              <h3>Joinery &amp; stone</h3>
+              <p>Kitchens, vanities, robes and stairs detailed with our own joiners and stonemasons, so nothing gets lost between trades.</p>
+            </div>
+          </article>
+
+          <article class="spot spot--marquee b-5" data-reveal style="--d:200ms">
+            <div>
+              <h3>Materials we love working with</h3>
+              <p>A short list, chosen for how they age.</p>
+            </div>
+            <div class="marquee" aria-hidden="true">
+              <div class="marquee__track" id="marqueeMaterials" style="--marquee-dur:26s">
+                <span>Honed stone<i></i></span><span>American oak<i></i></span><span>Brushed brass<i></i></span><span>Micro-cement<i></i></span><span>Travertine<i></i></span><span>Frameless glass<i></i></span><span>Wool carpet<i></i></span><span>Limewash<i></i></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="spot b-6" data-reveal style="--d:240ms">
+            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-5 7-12a7 7 0 0 0-14 0c0 7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+            <div>
+              <h3>Landscaping &amp; outdoor rooms</h3>
+              <p>Terraces, outdoor kitchens, pools and fencing built as part of the house — so the outside is finished on handover day, not six months later.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section process" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-reveal>How we work</span>
+            <h2 class="display" data-cut>Four stages, <span class="serif">no surprises.</span></h2>
+          </div>
+          <p class="lede" data-reveal style="--d:160ms">A build should feel calm from the client's side. Fixed price where it can be, transparent where it can't, and one point of contact from the first walk-through to the final clean.</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline__beam" id="timelineBeam"></div>
+          <div class="step">
+            <i class="step__dot"></i>
+            <div class="step__num">01 — Consult</div>
+            <h3>We read the drawings <em>with you.</em></h3>
+            <p>A site visit and a detailed, line-by-line estimate. We flag buildability issues early, when they are cheap to solve, and give you a realistic program.</p>
+          </div>
+          <div class="step">
+            <i class="step__dot"></i>
+            <div class="step__num">02 — Plan</div>
+            <h3>Approvals, selections, <em>set-out.</em></h3>
+            <p>We coordinate engineers, certifiers and your architect, lock in selections, and prototype the tricky details — the curved stair, the stone island — before a trade sets foot on site.</p>
+          </div>
+          <div class="step">
+            <i class="step__dot"></i>
+            <div class="step__num">03 — Build</div>
+            <h3>One team, <em>every week.</em></h3>
+            <p>A dedicated site supervisor, weekly progress reports with photos, and our own carpenters on the frame, the fit-out and the finish carpentry.</p>
+          </div>
+          <div class="step">
+            <i class="step__dot"></i>
+            <div class="step__num">04 — Handover</div>
+            <h3>Finished means <em>finished.</em></h3>
+            <p>Detailed clean, a walk-through with the full team, manuals and warranties in hand, and a follow-up visit after you have lived in the house for a season.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section section--tight" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-reveal>Kind words</span>
+            <h2 class="display" data-cut>What clients <span class="serif">say.</span></h2>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi__stack" id="testiStack" data-reveal></div>
+          <div data-reveal style="--d:120ms">
+            <p class="testi__quote" id="testiQuote"></p>
+            <div class="testi__who"><b id="testiName"></b><span id="testiRole"></span></div>
+            <div class="testi__nav">
+              <button id="testiPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg></button>
+              <button id="testiNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+            </div>
+            <p class="testi__note">Sample testimonials — replace with real client quotes in assets/js/main.js.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIG MARQUEE ============ -->
+    <div class="marquee marquee--big marquee--velocity" aria-hidden="true">
+      <div class="marquee__track" id="marqueeBig" style="--marquee-dur:36s">
+        <span>Let's build <em>something</em> that lasts<i></i></span>
+        <span>Let's build <em>something</em> that lasts<i></i></span>
+      </div>
+    </div>
+
+    <!-- ============ CONTACT / FOOTER (curtain reveal) ============ -->
+    <div class="cta-wrap" id="contact">
+    <footer class="cta section">
+      <div class="cta__beams"></div>
+      <div class="container cta__inner">
+        <span class="eyebrow" data-reveal>Get in touch</span>
+        <h2 style="margin-top:20px" data-reveal>
+          <a class="cta__title" href="#" id="ctaMail" aria-label="Start a build — email Intricon">
+            <svg class="txtfx" id="txtfx" viewBox="0 0 1200 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="txtGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+                  <stop offset="0" stop-color="#e6c98f"/><stop offset="0.5" stop-color="#c9a56a"/><stop offset="1" stop-color="#f2efe9"/>
+                </linearGradient>
+                <radialGradient id="txtReveal" gradientUnits="userSpaceOnUse" r="230" cx="-1000" cy="-1000">
+                  <stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+                </radialGradient>
+                <mask id="txtMask"><rect x="0" y="0" width="1200" height="230" fill="url(#txtReveal)"/></mask>
+              </defs>
+              <text class="t t--base" x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" textLength="1170" lengthAdjust="spacingAndGlyphs">START A BUILD</text>
+              <text class="t t--draw" x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" textLength="1170" lengthAdjust="spacingAndGlyphs">START A BUILD</text>
+              <text class="t t--fill" mask="url(#txtMask)" x="50%" y="52%" text-anchor="middle" dominant-baseline="middle" textLength="1170" lengthAdjust="spacingAndGlyphs">START A BUILD</text>
+            </svg>
+          </a>
+        </h2>
+        <div class="cta__row">
+          <div>
+            <h4>Intricon</h4>
+            <p id="footerBlurb">Builders of considered homes across Sydney. Architectural new builds, waterfront residences, luxury renovations.</p>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <div id="footerContact"></div>
+          </div>
+          <div>
+            <h4>Projects</h4>
+            <div id="footerProjects"></div>
+          </div>
+          <div>
+            <h4>Navigate</h4>
+            <a href="#work">Work</a>
+            <a href="#studio">Studio</a>
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#top">Back to top</a>
+          </div>
+        </div>
+        <div class="cta__bottom">
+          <span>© <span id="year"></span> Intricon. <span id="footerLicence"></span></span>
+          <span>Site components adapted from <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a>.</span>
+        </div>
+      </div>
+    </footer>
+    </div>
+
+  </main>
+
+  <!-- Tubelight dock nav -->
+  <nav class="dock" id="dock" aria-label="Section navigation">
+    <a href="#top" data-section="top" class="is-active">Home</a>
+    <a href="#work" data-section="work">Work</a>
+    <a href="#studio" data-section="studio">Studio</a>
+    <a href="#services" data-section="services">Services</a>
+    <a href="#process" data-section="process">Process</a>
+    <a href="#contact" data-section="contact">Contact</a>
+  </nav>
+
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project — Intricon</title>
+  <meta name="description" content="A completed Intricon project, photographed room by room." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0c'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c9a56a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="has-cursor">
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__panel preloader__panel--top"></div>
+    <div class="preloader__panel preloader__panel--bottom"></div>
+    <div class="preloader__inner">
+      <div class="preloader__word" id="preloaderWord">INTRICON</div>
+      <div class="preloader__count"><span id="preloaderCount">0</span><sup>%</sup></div>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+    </div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring"><span id="cursorLabel">View</span></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <header class="topbar" id="topbar">
+    <a class="brand" href="index.html" aria-label="Intricon home">
+      <span class="brand__mark"><i></i></span>
+      <span>Intricon</span>
+    </a>
+    <div class="topbar__right">
+      <span class="topbar__time" id="localTime">Sydney · --:--</span>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+        <span id="menuBtnLabel">Menu</span>
+        <span class="menu-btn__lines"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <div class="menu__bg" id="menuBg"></div>
+    <div class="menu__inner">
+      <ul class="menu__links" id="menuLinks">
+        <li><a href="index.html#work" data-bg="12"><small>01</small>Work</a></li>
+        <li><a href="index.html#studio" data-bg="10"><small>02</small>Studio</a></li>
+        <li><a href="index.html#services" data-bg="5"><small>03</small>Services</a></li>
+        <li><a href="index.html#process" data-bg="0"><small>04</small>Process</a></li>
+        <li><a href="index.html#contact" data-bg="27"><small>05</small>Contact</a></li>
+      </ul>
+      <div class="menu__side">
+        <h4>Projects</h4>
+        <ul id="menuProjects"></ul>
+        <div class="menu__contact" id="menuContact"></div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="projectRoot">
+    <!-- Rendered by assets/js/project.js from the ?p= parameter -->
+  </main>
+
+  <nav class="dock" id="dock" aria-label="Project navigation">
+    <a href="index.html#work" data-section="">All work</a>
+    <a href="#overview" data-section="overview" class="is-active">Overview</a>
+    <a href="#gallery" data-section="gallery">Gallery</a>
+    <a href="#materials" data-section="materials">Materials</a>
+    <a href="#next" data-section="next">Next</a>
+  </nav>
+
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/project.js"></script>
+</body>
+</html>

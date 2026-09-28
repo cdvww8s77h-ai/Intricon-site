@@ -156,7 +156,7 @@
       var feat = D.projects[0];
       var items = [
         ["Work", pre + "#work", D.img(feat, 12, "md")],
-        ["Studio", pre + "#studio", D.img(feat, 10, "md")],
+        ["About", pre + "#about", D.img(feat, 10, "md")],
         ["Services", pre + "#services", D.img(feat, 5, "md")],
         ["Process", pre + "#process", D.img(feat, 0, "md")],
         ["Contact", "contact.html", D.img(feat, 27, "md")],
@@ -186,7 +186,7 @@
       $$("a", mp).forEach(function (a) { hookBg(a); a.addEventListener("click", function () { setTimeout(function () { set(false); }, 120); }); });
     }
     var mc = $("#menuContact");
-    if (mc) mc.innerHTML = '<a href="mailto:' + co.email + '">' + co.email + '</a><br><a href="tel:' + co.phoneIntl + '">' + co.phone + '</a><br>' + co.address + '<br><span style="font-size:12px;color:var(--fg-3)">ABN ' + co.abn + ' · Lic. ' + co.licence + '</span>';
+    if (mc) mc.innerHTML = co.owner + ', ' + co.ownerTitle + '<br><a href="mailto:' + co.email + '">' + co.email + '</a><br><a href="tel:' + co.phoneIntl + '">' + co.phone + '</a><br>' + co.address + '<br><span style="font-size:12px;color:var(--fg-3)">ABN ' + co.abn + ' · Lic. ' + co.licence + '</span>';
   }
 
   /* ---------- Scroll progress bar ---------- */
@@ -421,6 +421,7 @@
   }
   function companyLines() {
     return '<span style="display:block;font-size:14px;line-height:1.9">' + co.legalName + '</span>' +
+      '<span style="display:block;font-size:14px;line-height:1.9">' + co.owner + ', ' + co.ownerTitle + '</span>' +
       '<span class="muted" style="display:block;font-size:14px;line-height:1.9">ABN ' + co.abn + '</span>' +
       '<span class="muted" style="display:block;font-size:14px;line-height:1.9">' + co.licenceLabel + '</span>' +
       '<span class="muted" style="display:block;font-size:14px;line-height:1.9">Established ' + co.establishedLabel + '</span>';
@@ -442,7 +443,7 @@
             '<div><a class="brand" href="index.html"><span class="brand__mark"><i></i></span><span>' + co.name + '</span></a><p style="margin-top:16px">' + co.tagline + ' Licensed NSW builder since ' + co.established + ', working across Sydney.</p></div>' +
             '<div><h4>Contact</h4>' + contactLinks() + '</div>' +
             '<div><h4>Company</h4>' + companyLines() + '</div>' +
-            '<div><h4>Navigate</h4><a href="index.html#work">Work</a><a href="index.html#studio">Studio</a><a href="index.html#services">Services</a><a href="index.html#process">Process</a><a href="contact.html">Contact</a></div>' +
+            '<div><h4>Navigate</h4><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="index.html#services">Services</a><a href="index.html#process">Process</a><a href="contact.html">Contact</a></div>' +
           '</div>' +
           '<div class="cta__bottom site-footer__bottom"><span>© ' + new Date().getFullYear() + ' ' + co.legalName + '.</span><span>Site components adapted from <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a>.</span></div>' +
         '</div></footer>';

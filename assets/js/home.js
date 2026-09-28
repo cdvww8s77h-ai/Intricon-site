@@ -100,7 +100,7 @@
         '</a>';
     }).join("");
     var lede = $("#workLede");
-    if (lede) lede.textContent = D.projects.length + " completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Hover a project to preview it, click to open the full photo record.";
+    if (lede) lede.textContent = D.projects.length + " completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Open any project to see it room by room.";
     if (!prev || !U.fine) return;
     prev.innerHTML = D.projects.map(function (p) { return '<img src="' + D.thumb(p, "md") + '" alt="" />'; }).join("");
     var imgs = $$("img", prev);
@@ -128,12 +128,12 @@
     var sec = $("#highlights"), pin = $(".hscroll__pin", sec), track = $("#hscrollTrack"), bar = $("#hscrollBar"), count = $("#hscrollCount");
     if (!sec || !track) return;
     var n = live.length, word = WORDS[n] || String(n);
-    var html = '<div class="hscroll__intro"><span class="eyebrow">Across Sydney</span><h2 class="display" data-cut>' + word.charAt(0).toUpperCase() + word.slice(1) + ' projects, <span class="serif">one standard.</span></h2><p class="muted">From the harbour to the river to the bay, and the suburbs in between. Scroll to move along the strip; click a frame to open the project.</p><a class="btn magnetic" href="#work"><i class="btn__dot"></i><span>The full index</span></a></div>';
+    var html = '<div class="hscroll__intro"><span class="eyebrow">Across Sydney</span><h2 class="display" data-cut>' + word.charAt(0).toUpperCase() + word.slice(1) + ' projects, <span class="serif">one standard.</span></h2><p class="muted">From the harbour to the river to the bay, and the suburbs in between. Scroll or swipe along the strip; select a frame to open the project.</p><a class="btn magnetic" href="#work"><i class="btn__dot"></i><span>The full index</span></a></div>';
     live.forEach(function (p, i) {
       var portrait = D.isPortrait(p, p.cover);
       html += '<a class="hscroll__item' + (portrait ? " hscroll__item--tall" : "") + '" href="project.html?p=' + p.id + '" data-cursor="view" data-cursor-label="Open" data-i="' + i + '"><figure><img src="' + D.cover(p, "md") + '" alt="' + p.title + '" loading="lazy" /></figure><figcaption><span>' + p.title + ' — ' + p.subtitle + '</span><b>' + String(i + 1).padStart(2, "0") + '</b></figcaption></a>';
     });
-    html += '<div class="hscroll__end"><h3 class="display" data-cut>Something <span class="serif">to build?</span></h3><p class="muted">Tell us about the site and the drawings you have. We reply personally, usually within a business day.</p><a class="btn btn--solid magnetic" href="contact.html"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>';
+    html += '<div class="hscroll__end"><h3 class="display" data-cut>Something <span class="serif">to build?</span></h3><p class="muted">Tell us about the site and the drawings you have. Tony replies personally, usually within a business day.</p><a class="btn btn--solid magnetic" href="contact.html"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>';
     track.innerHTML = html;
     var items = $$(".hscroll__item", track);
     var mobile = function () { return !U.fine || innerWidth <= 720; };
@@ -241,7 +241,7 @@
 
   /* ---------- Testimonials ---------- */
   var TESTIMONIALS = [
-    // Sample quotes — replace with real client words. `p` is a project id, `img` a photo number from that project.
+    // SAMPLE quotes, not shown on the site: the section is commented out in index.html until these are replaced with real client words. `p` is a project id, `img` a photo number from that project.
     { quote: "Every trade on site knew the drawings better than we did. The stair alone would have been enough — it's the first thing every visitor touches.", name: "Sample client", role: "Replace with a real quote", p: "tennyson-pt", img: 12 },
     { quote: "We were warned that a build this detailed would run late. Intricon handed over on the program they gave us at the estimate, with a house that felt finished on day one.", name: "Sample client", role: "Replace with a real quote", p: "cronulla", img: 64 },
     { quote: "The weekly photo reports meant we never had to ask what was happening. When we did have a question, the director answered it himself, usually from site.", name: "Sample client", role: "Replace with a real quote", p: "bellevue-hill", img: 14 },

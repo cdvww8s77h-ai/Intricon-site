@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Intricon — Builders of considered homes</title>
-  <meta name="description" content="Intricon Pty Ltd is a licensed Sydney builder, established 2008: architectural new builds, waterfront homes, renovations, duplexes and townhouse developments. Explore our completed work." />
+  <meta name="description" content="Intricon Pty Ltd is a licensed Sydney builder, established 2008: architectural new builds, waterfront homes, renovations, duplexes and townhouse developments. Founded and run by Tony Lahoud. Explore our completed work." />
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0c'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c9a56a'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,6 +44,7 @@
     </a>
     <div class="topbar__right">
       <span class="topbar__time" id="localTime" title="Local time, Sydney">Sydney · --:--</span>
+      <a class="topbar__cta" href="contact.html">Get in touch</a>
       <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
         <span id="menuBtnLabel">Menu</span>
         <span class="menu-btn__lines"><i></i><i></i></span>
@@ -121,7 +122,7 @@
             <span class="eyebrow" data-reveal>Selected work</span>
             <h2 class="display" data-cut>Every home, <span class="serif">in detail.</span></h2>
           </div>
-          <p class="lede" id="workLede" data-reveal style="--d:160ms">Completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Hover a project to preview it, click to open the full photo record.</p>
+          <p class="lede" id="workLede" data-reveal style="--d:160ms">Completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Open any project to see it room by room.</p>
         </div>
         <div class="index__list" id="indexList"></div>
       </div>
@@ -138,17 +139,17 @@
     </section>
 
     <!-- ============ STUDIO / MANIFESTO ============ -->
-    <section class="section manifesto" id="studio">
+    <section class="section manifesto" id="about">
       <div class="container">
         <div class="manifesto__grid">
           <div>
-            <span class="eyebrow" data-reveal>The studio</span>
+            <span class="eyebrow" data-reveal>About Intricon</span>
             <p class="reveal-words" id="revealWords" style="margin-top:24px">
               We are a builder that treats the last five percent of a job as the whole job. Since 2008 we have built <em>waterfront</em> homes, <em>period</em> renovations, duplexes and townhouse developments across Sydney, and the same rule applies to all of them: the set-out of a stair, the grain of a door, the line where stone meets brass are what our clients live with, so they are what we obsess over.
             </p>
           </div>
           <div class="manifesto__aside">
-            <p data-reveal>Intricon Pty Ltd is a licensed NSW builder, established in May 2008. We build new homes, renovations and multi-dwelling developments across Sydney, we run one dedicated team per site, and the director walks every job every week.</p>
+            <p data-reveal>Intricon Pty Ltd is a licensed NSW builder, founded by Tony Lahoud in May 2008. We build new homes, renovations and multi-dwelling developments across Sydney, we run one dedicated team per site, and Tony walks every job every week.</p>
             <p data-reveal style="--d:100ms">The result is a home that photographs beautifully and, more importantly, still feels considered a decade after handover.</p>
             <div data-reveal style="--d:200ms"><a class="btn btn--light magnetic" href="contact.html"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
           </div>
@@ -238,7 +239,7 @@
             <span class="eyebrow" data-reveal>How we work</span>
             <h2 class="display" data-cut>Four stages, <span class="serif">no surprises.</span></h2>
           </div>
-          <p class="lede" data-reveal style="--d:160ms">A build should feel calm from the client's side. Fixed price where it can be, transparent where it can't, and one point of contact from the first walk-through to the final clean.</p>
+          <p class="lede" data-reveal style="--d:160ms">A build should feel calm from the client's side. Fixed price where it can be, transparent where it can't, and a direct line to Tony from the first walk-through to the final clean.</p>
         </div>
 
         <div class="timeline" id="timeline">
@@ -271,8 +272,9 @@
       </div>
     </section>
 
-    <!-- ============ TESTIMONIALS ============ -->
-    <section class="section section--tight" id="testimonials">
+    <!-- ============ TESTIMONIALS (hidden until real client quotes are in assets/js/home.js;
+         to restore, remove the comment markers around this section) ============
+    <section class="section section&#45;&#45;tight" id="testimonials">
       <div class="container">
         <div class="section-head">
           <div>
@@ -282,7 +284,7 @@
         </div>
         <div class="testi">
           <div class="testi__stack" id="testiStack" data-reveal></div>
-          <div data-reveal style="--d:120ms">
+          <div data-reveal style="&#45;&#45;d:120ms">
             <p class="testi__quote" id="testiQuote"></p>
             <div class="testi__who"><b id="testiName"></b><span id="testiRole"></span></div>
             <div class="testi__nav">
@@ -294,6 +296,7 @@
         </div>
       </div>
     </section>
+    ============ END TESTIMONIALS ============ -->
 
     <!-- ============ BIG MARQUEE ============ -->
     <div class="marquee marquee--big marquee--velocity" aria-hidden="true">
@@ -310,7 +313,7 @@
       <div class="container cta__inner">
         <span class="eyebrow" data-reveal>Get in touch</span>
         <h2 style="margin-top:20px" data-reveal>
-          <a class="cta__title" href="#" id="ctaMail" aria-label="Start a build — email Intricon">
+          <a class="cta__title" href="#" id="ctaMail" aria-label="Start a build — go to the contact page">
             <svg class="txtfx" id="txtfx" viewBox="0 0 1200 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
               <defs>
                 <linearGradient id="txtGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
@@ -348,7 +351,7 @@
           <div>
             <h4>Navigate</h4>
             <a href="#work">Work</a>
-            <a href="#studio">Studio</a>
+            <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#process">Process</a>
             <a href="contact.html">Contact</a>
@@ -369,7 +372,7 @@
   <nav class="dock" id="dock" aria-label="Section navigation">
     <a href="#top" data-section="top" class="is-active">Home</a>
     <a href="#work" data-section="work">Work</a>
-    <a href="#studio" data-section="studio">Studio</a>
+    <a href="#about" data-section="about">About</a>
     <a href="#services" data-section="services">Services</a>
     <a href="#process" data-section="process">Process</a>
     <a href="contact.html" data-section="contact">Contact</a>

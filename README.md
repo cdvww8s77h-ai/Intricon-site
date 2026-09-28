@@ -9,7 +9,7 @@ intricon-site/
 ├─ index.html                 homepage (non-conventional editorial layout)
 ├─ project.html               project page — renders any job from ?p=<id>
 ├─ contact.html               contact page with the enquiry form
-├─ publish.sh                 one command to push changes live (GitHub Pages)
+├─ publish.sh                 one command to push changes live (Vercel)
 ├─ README.md                  this file
 ├─ ATTRIBUTIONS.md            21st.dev components that were ported
 └─ assets/

@@ -25,6 +25,8 @@ window.INTRICON = window.INTRICON || {};
 window.INTRICON.company = {
   name: "Intricon",
   legalName: "Intricon Pty Ltd",
+  owner: "Tony Lahoud",
+  ownerTitle: "Founder & Director",
   tagline: "Builders of considered homes.",
   location: "Sydney, NSW",
   timezone: "Australia/Sydney",

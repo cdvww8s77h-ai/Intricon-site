@@ -1,7 +1,7 @@
 /* =====================================================================
    INTRICON — contact page
    Sends the form to the business email through FormSubmit (no server
-   needed on GitHub Pages). Falls back to opening the visitor's mail app
+   needed on Vercel). Falls back to opening the visitor's mail app
    if the request cannot be made.
    ===================================================================== */
 (function () {
@@ -15,6 +15,7 @@
   if (facts) {
     facts.innerHTML = [
       ["Company", co.legalName],
+      [co.ownerTitle, co.owner],
       ["Builder's licence", co.licence],
       ["ABN", co.abn],
       ["Established", co.establishedLabel],

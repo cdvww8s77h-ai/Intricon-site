@@ -1,6 +1,6 @@
 #!/bin/sh
 # Publish the site: commits every change and pushes to GitHub.
-# GitHub Pages rebuilds the live site automatically (about a minute).
+# Vercel redeploys the live site automatically from each push (under a minute).
 #   Usage:  ./publish.sh "Added Hillside House photos"
 set -e
 cd "$(dirname "$0")"
@@ -11,4 +11,4 @@ else
   git commit -m "${1:-Update site}"
 fi
 git push -u origin main
-echo "Pushed. The live site updates in about a minute."
+echo "Pushed. Vercel will redeploy the live site shortly."

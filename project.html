@@ -51,13 +51,7 @@
   <nav class="menu" id="menu" aria-label="Main menu">
     <div class="menu__bg" id="menuBg"></div>
     <div class="menu__inner">
-      <ul class="menu__links" id="menuLinks">
-        <li><a href="index.html#work" data-bg="12"><small>01</small>Work</a></li>
-        <li><a href="index.html#studio" data-bg="10"><small>02</small>Studio</a></li>
-        <li><a href="index.html#services" data-bg="5"><small>03</small>Services</a></li>
-        <li><a href="index.html#process" data-bg="0"><small>04</small>Process</a></li>
-        <li><a href="index.html#contact" data-bg="27"><small>05</small>Contact</a></li>
-      </ul>
+      <ul class="menu__links" id="menuLinks"></ul>
       <div class="menu__side">
         <h4>Projects</h4>
         <ul id="menuProjects"></ul>
@@ -66,8 +60,9 @@
     </div>
   </nav>
 
-  <main id="projectRoot">
-    <!-- Rendered by assets/js/project.js from the ?p= parameter -->
+  <main>
+    <div id="projectRoot"><!-- Rendered by assets/js/project.js from the ?p= parameter --></div>
+    <div id="siteFooter"></div>
   </main>
 
   <nav class="dock" id="dock" aria-label="Project navigation">
@@ -76,9 +71,11 @@
     <a href="#gallery" data-section="gallery">Gallery</a>
     <a href="#materials" data-section="materials">Materials</a>
     <a href="#next" data-section="next">Next</a>
+    <a href="contact.html" data-section="">Contact</a>
   </nav>
 
   <script src="assets/js/projects.js"></script>
+  <script src="assets/js/dims.js"></script>
   <script src="assets/js/shared.js"></script>
   <script src="assets/js/project.js"></script>
 </body>

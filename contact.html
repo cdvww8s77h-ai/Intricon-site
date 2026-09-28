@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Intricon</title>
+  <meta name="description" content="Talk to Intricon about your build. Licensed NSW builder, established 2008, working across Sydney." />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0c'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c9a56a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="has-cursor">
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__panel preloader__panel--top"></div>
+    <div class="preloader__panel preloader__panel--bottom"></div>
+    <div class="preloader__inner">
+      <div class="preloader__word" id="preloaderWord">INTRICON</div>
+      <div class="preloader__count"><span id="preloaderCount">0</span><sup>%</sup></div>
+      <div class="preloader__bar"><i id="preloaderBar"></i></div>
+    </div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring"><span id="cursorLabel">View</span></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <header class="topbar" id="topbar">
+    <a class="brand" href="index.html" aria-label="Intricon home">
+      <span class="brand__mark"><i></i></span>
+      <span>Intricon</span>
+    </a>
+    <div class="topbar__right">
+      <span class="topbar__time" id="localTime">Sydney · --:--</span>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+        <span id="menuBtnLabel">Menu</span>
+        <span class="menu-btn__lines"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <div class="menu__bg" id="menuBg"></div>
+    <div class="menu__inner">
+      <ul class="menu__links" id="menuLinks"></ul>
+      <div class="menu__side">
+        <h4>Projects</h4>
+        <ul id="menuProjects"></ul>
+        <div class="menu__contact" id="menuContact"></div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="contact-page">
+
+    <section class="contact-hero">
+      <div class="hero__grid"></div>
+      <div class="hero__aurora"><i></i><i></i><i></i></div>
+      <div class="container contact-hero__inner">
+        <span class="eyebrow" data-reveal>Contact</span>
+        <h1 class="display contact-hero__title" data-cut>Let's talk about <span class="serif">your build.</span></h1>
+        <p class="lede" data-reveal style="--d:120ms">Tell us about the site, the drawings you have and the timeframe you are working to. We reply to every enquiry personally, usually within one business day.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container contact-grid">
+
+        <aside class="contact-side">
+          <div class="contact-direct" data-reveal>
+            <span class="eyebrow">Direct</span>
+            <a class="contact-big" id="contactPhone" href="#">0414 307 707</a>
+            <a class="contact-big contact-big--email" id="contactEmail" href="#">tony@intricon.com.au</a>
+            <p class="muted" id="contactHours">Monday to Friday, 7am–5pm. Site visits by appointment across Sydney.</p>
+          </div>
+
+          <ul class="contact-facts" id="contactFacts" data-reveal style="--d:100ms"></ul>
+
+          <div class="contact-next" data-reveal style="--d:200ms">
+            <span class="eyebrow">What happens next</span>
+            <ol class="contact-steps">
+              <li><b>We call you back.</b> A short conversation about the site, the brief and your timing.</li>
+              <li><b>We walk the site.</b> If your drawings are ready, we review buildability on the spot and flag anything that will cost time later.</li>
+              <li><b>You get a real number.</b> A line-by-line estimate and a realistic program, not a square-metre guess.</li>
+            </ol>
+          </div>
+        </aside>
+
+        <div class="contact-card" data-reveal style="--d:60ms">
+          <form class="cform" id="contactForm" action="https://formsubmit.co/tony@intricon.com.au" method="POST" novalidate>
+            <!-- FormSubmit settings (see README: activate once by clicking the link in the first email) -->
+            <input type="hidden" name="_subject" value="New enquiry from the Intricon website" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" class="cform__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <div class="cform__head">
+              <h2 class="display">Start a <span class="serif">conversation.</span></h2>
+              <p>Fields marked <i class="req">*</i> are required.</p>
+            </div>
+
+            <div class="cform__row cform__row--2">
+              <label class="field"><span class="field__label">Your name <i class="req">*</i></span><input type="text" name="name" autocomplete="name" required /></label>
+              <label class="field"><span class="field__label">Phone</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" /></label>
+            </div>
+            <div class="cform__row cform__row--2">
+              <label class="field"><span class="field__label">Email <i class="req">*</i></span><input type="email" name="email" autocomplete="email" required /></label>
+              <label class="field"><span class="field__label">Suburb of the project</span><input type="text" name="suburb" autocomplete="off" /></label>
+            </div>
+
+            <fieldset class="chips">
+              <legend class="field__label">What are you planning?</legend>
+              <label><input type="radio" name="project_type" value="New build" /><span>New build</span></label>
+              <label><input type="radio" name="project_type" value="Knockdown rebuild" /><span>Knockdown rebuild</span></label>
+              <label><input type="radio" name="project_type" value="Renovation / extension" /><span>Renovation or extension</span></label>
+              <label><input type="radio" name="project_type" value="Duplex / development" /><span>Duplex or development</span></label>
+              <label><input type="radio" name="project_type" value="Not sure yet" /><span>Not sure yet</span></label>
+            </fieldset>
+
+            <fieldset class="chips">
+              <legend class="field__label">Where are you up to?</legend>
+              <label><input type="radio" name="stage" value="Just exploring" /><span>Just exploring</span></label>
+              <label><input type="radio" name="stage" value="Have concept plans" /><span>Have concept plans</span></label>
+              <label><input type="radio" name="stage" value="Have DA / approved plans" /><span>DA or approved plans</span></label>
+              <label><input type="radio" name="stage" value="Ready to build" /><span>Ready to build</span></label>
+            </fieldset>
+
+            <label class="field field--area"><span class="field__label">Tell us about the project <i class="req">*</i></span><textarea name="message" rows="5" required placeholder="Site, size, style, timing — whatever you know so far."></textarea></label>
+
+            <div class="cform__foot">
+              <p class="cform__note" id="formNote">Sent straight to tony@intricon.com.au. No newsletters, no sharing of your details.</p>
+              <button class="btn btn--solid magnetic cform__submit" type="submit" id="submitBtn"><span id="submitLabel">Send enquiry</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+            </div>
+            <p class="cform__error" id="formError" role="alert" hidden></p>
+          </form>
+
+          <div class="cform__done" id="formDone" hidden>
+            <span class="eyebrow eyebrow--noline">Sent</span>
+            <h2 class="display">Thanks, <span class="serif" id="doneName">we've got it.</span></h2>
+            <p>Your enquiry is on its way to Tony. Expect a call or a reply within one business day. In the meantime, have a look through the <a href="index.html#work">completed work</a>.</p>
+            <a class="btn magnetic" href="index.html#work"><i class="btn__dot"></i><span>See the work</span></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div id="siteFooter"></div>
+  </main>
+
+  <nav class="dock" id="dock" aria-label="Navigation">
+    <a href="index.html" data-section="">Home</a>
+    <a href="index.html#work" data-section="">Work</a>
+    <a href="index.html#studio" data-section="">Studio</a>
+    <a href="index.html#process" data-section="">Process</a>
+    <a href="contact.html" data-section="" class="is-active">Contact</a>
+  </nav>
+
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/contact.js"></script>
+</body>
+</html>

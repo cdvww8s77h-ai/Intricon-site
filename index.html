@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Intricon — Builders of considered homes</title>
-  <meta name="description" content="Intricon is a Sydney building company delivering architectural homes, waterfront residences and luxury renovations. Explore our completed work." />
+  <meta name="description" content="Intricon Pty Ltd is a licensed Sydney builder, established 2008: architectural new builds, waterfront homes, renovations, duplexes and townhouse developments. Explore our completed work." />
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0c'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c9a56a'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,13 +55,7 @@
   <nav class="menu" id="menu" aria-label="Main menu">
     <div class="menu__bg" id="menuBg"></div>
     <div class="menu__inner">
-      <ul class="menu__links" id="menuLinks">
-        <li><a href="#work" data-bg="12"><small>01</small>Work</a></li>
-        <li><a href="#studio" data-bg="10"><small>02</small>Studio</a></li>
-        <li><a href="#services" data-bg="5"><small>03</small>Services</a></li>
-        <li><a href="#process" data-bg="0"><small>04</small>Process</a></li>
-        <li><a href="#contact" data-bg="27"><small>05</small>Contact</a></li>
-      </ul>
+      <ul class="menu__links" id="menuLinks"></ul>
       <div class="menu__side">
         <h4>Projects</h4>
         <ul id="menuProjects"></ul>
@@ -79,28 +73,29 @@
       <div class="hero__trail" id="heroTrail"></div>
 
       <div class="hero__content">
-        <span class="eyebrow eyebrow--noline hero__kicker">Sydney · Est. builders of architectural homes</span>
+        <span class="eyebrow eyebrow--noline hero__kicker">Sydney · Licensed builders since 2008</span>
         <h1 class="hero__title" id="heroTitle" aria-label="Intricon">INTRICON</h1>
         <p class="hero__sub">
           <span>Builders of</span>
           <span class="flip" id="flipWords" aria-live="polite">
             <span class="is-in">considered</span>
             <span>waterfront</span>
+            <span>family</span>
             <span>bespoke</span>
             <span>enduring</span>
-            <span>light-filled</span>
+            <span>coastal</span>
           </span>
           <span>homes.</span>
         </p>
         <div class="hero__cta">
           <a class="btn btn--solid magnetic" href="#work"><span>See the work</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-          <a class="btn btn--shimmer magnetic" href="project.html?p=beach-st"><i class="btn__dot"></i><span>Latest: 25 Beach Street</span></a>
+          <a class="btn btn--shimmer magnetic" href="project.html?p=tennyson-pt" id="latestBtn"><i class="btn__dot"></i><span>Latest: 25 Tennyson Point</span></a>
         </div>
       </div>
 
       <div class="hero__foot">
         <a class="scroll-cue" href="#work"><i></i><span>Scroll</span></a>
-        <p class="hint hide-touch">Move your cursor across the page to leaf through the latest project.</p>
+        <p class="hint hide-touch">Move your cursor across the page to leaf through our work.</p>
       </div>
     </section>
 
@@ -108,12 +103,13 @@
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track" id="marqueeA">
         <span>Architectural new builds<i></i></span>
-        <span>Waterfront residences<i></i></span>
+        <span>Waterfront homes<i></i></span>
         <span>Knockdown rebuilds<i></i></span>
-        <span>Luxury renovations<i></i></span>
+        <span>Renovations &amp; restorations<i></i></span>
+        <span>Duplexes<i></i></span>
+        <span>Townhouse developments<i></i></span>
         <span>Bespoke joinery<i></i></span>
-        <span>Stone &amp; brass detailing<i></i></span>
-        <span>Owner-supervised sites<i></i></span>
+        <span>Licensed NSW builder since 2008<i></i></span>
       </div>
     </div>
 
@@ -125,7 +121,7 @@
             <span class="eyebrow" data-reveal>Selected work</span>
             <h2 class="display" data-cut>Every home, <span class="serif">in detail.</span></h2>
           </div>
-          <p class="lede" data-reveal style="--d:160ms">Hover a project to preview it, click to open the full photo record. New jobs are added as they reach handover.</p>
+          <p class="lede" id="workLede" data-reveal style="--d:160ms">Completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Hover a project to preview it, click to open the full photo record.</p>
         </div>
         <div class="index__list" id="indexList"></div>
       </div>
@@ -137,7 +133,7 @@
       <div class="hscroll__pin">
         <div class="hscroll__track" id="hscrollTrack"></div>
         <div class="hscroll__bar"><i id="hscrollBar"></i></div>
-        <div class="hscroll__count" id="hscrollCount">01 / 08</div>
+        <div class="hscroll__count" id="hscrollCount">01 / 09</div>
       </div>
     </section>
 
@@ -148,13 +144,13 @@
           <div>
             <span class="eyebrow" data-reveal>The studio</span>
             <p class="reveal-words" id="revealWords" style="margin-top:24px">
-              We are a builder that treats the last five percent of a job as the whole job. The <em>set-out</em> of a stair, the <em>grain</em> of an oak door, the line where stone meets brass — these are the things our clients live with, so they are the things we obsess over.
+              We are a builder that treats the last five percent of a job as the whole job. Since 2008 we have built <em>waterfront</em> homes, <em>period</em> renovations, duplexes and townhouse developments across Sydney, and the same rule applies to all of them: the set-out of a stair, the grain of a door, the line where stone meets brass are what our clients live with, so they are what we obsess over.
             </p>
           </div>
           <div class="manifesto__aside">
-            <p data-reveal>Intricon builds architect-designed homes across Sydney. We run one dedicated team per site, we do our own carpentry and set-out, and the director walks every job every week.</p>
+            <p data-reveal>Intricon Pty Ltd is a licensed NSW builder, established in May 2008. We build new homes, renovations and multi-dwelling developments across Sydney, we run one dedicated team per site, and the director walks every job every week.</p>
             <p data-reveal style="--d:100ms">The result is a home that photographs beautifully and, more importantly, still feels considered a decade after handover.</p>
-            <div data-reveal style="--d:200ms"><a class="btn btn--light magnetic" href="#contact"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
+            <div data-reveal style="--d:200ms"><a class="btn btn--light magnetic" href="contact.html"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>
           </div>
         </div>
         <div class="stats" id="stats"></div>
@@ -169,7 +165,7 @@
             <span class="eyebrow" data-reveal>What we do</span>
             <h2 class="display" data-cut>Built <span class="serif">properly,</span><br>from footing to finish.</h2>
           </div>
-          <p class="lede" data-reveal style="--d:160ms">One contract, one accountable team. We take architectural drawings and deliver a finished, defect-free home — with the joinery, stone and landscaping resolved by the same people who poured the slab.</p>
+          <p class="lede" data-reveal style="--d:160ms">One contract, one accountable team. Whether it is a single architect-designed home or a row of townhouses, we take the drawings and deliver a finished, defect-free result — with the joinery, stone and landscaping resolved by the same people who poured the slab.</p>
         </div>
 
         <div class="bento">
@@ -187,7 +183,7 @@
           </article>
 
           <article class="spot spot--img b-2" data-reveal style="--d:80ms">
-            <img id="bentoImg" alt="Brass tapware against stone tile at 25 Beach Street" loading="lazy" />
+            <img id="bentoImg" alt="Brass tapware against stone tile at 25 Tennyson Point" loading="lazy" />
             <div class="lens" id="lens" aria-hidden="true"><img id="lensImg" alt="" /></div>
             <div class="spot__cap">
               <h3>Detail is the brief</h3>
@@ -198,16 +194,16 @@
           <article class="spot b-3" data-reveal style="--d:120ms">
             <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg></div>
             <div>
-              <h3>Renovations &amp; extensions</h3>
-              <p>Opening up, adding a level or rebuilding behind a heritage façade — with the same finish standard as a new build.</p>
+              <h3>Renovations &amp; restorations</h3>
+              <p>Opening up, adding a level or a lift, or rebuilding a period home behind its original façade — with the same finish standard as a new build.</p>
             </div>
           </article>
 
           <article class="spot spot--stone b-4" data-reveal style="--d:160ms">
-            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></div>
+            <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21V9l4-3 4 3v12M11 21V9l4-3 4 3v12M3 21h18M6 13h2M6 17h2M14 13h2M14 17h2"/></svg></div>
             <div>
-              <h3>Joinery &amp; stone</h3>
-              <p>Kitchens, vanities, robes and stairs detailed with our own joiners and stonemasons, so nothing gets lost between trades.</p>
+              <h3>Duplexes &amp; townhouse developments</h3>
+              <p>Dual-occupancy pairs and multi-dwelling rows delivered as one program — consistent detailing across every home, and a finish buyers notice.</p>
             </div>
           </article>
 
@@ -218,7 +214,7 @@
             </div>
             <div class="marquee" aria-hidden="true">
               <div class="marquee__track" id="marqueeMaterials" style="--marquee-dur:26s">
-                <span>Honed stone<i></i></span><span>American oak<i></i></span><span>Brushed brass<i></i></span><span>Micro-cement<i></i></span><span>Travertine<i></i></span><span>Frameless glass<i></i></span><span>Wool carpet<i></i></span><span>Limewash<i></i></span>
+                <span>Honed stone<i></i></span><span>American oak<i></i></span><span>Brushed brass<i></i></span><span>Face brick<i></i></span><span>Wrought iron<i></i></span><span>Travertine<i></i></span><span>Frameless glass<i></i></span><span>Weatherboard<i></i></span><span>Wool carpet<i></i></span>
               </div>
             </div>
           </article>
@@ -226,8 +222,8 @@
           <article class="spot b-6" data-reveal style="--d:240ms">
             <div class="spot__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-5 7-12a7 7 0 0 0-14 0c0 7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
             <div>
-              <h3>Landscaping &amp; outdoor rooms</h3>
-              <p>Terraces, outdoor kitchens, pools and fencing built as part of the house — so the outside is finished on handover day, not six months later.</p>
+              <h3>Joinery, pools &amp; outdoor rooms</h3>
+              <p>Kitchens, stairs and robes detailed with our own joiners; terraces, outdoor kitchens, pools and fencing built as part of the house — so the outside is finished on handover day, not six months later.</p>
             </div>
           </article>
         </div>
@@ -293,7 +289,7 @@
               <button id="testiPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 19l-7-7 7-7"/></svg></button>
               <button id="testiNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
             </div>
-            <p class="testi__note">Sample testimonials — replace with real client quotes in assets/js/main.js.</p>
+            <p class="testi__note">Sample testimonials — replace with real client quotes in assets/js/home.js.</p>
           </div>
         </div>
       </div>
@@ -331,14 +327,19 @@
             </svg>
           </a>
         </h2>
-        <div class="cta__row">
+        <div class="cta__row cta__row--5">
           <div>
             <h4>Intricon</h4>
-            <p id="footerBlurb">Builders of considered homes across Sydney. Architectural new builds, waterfront residences, luxury renovations.</p>
+            <p id="footerBlurb">Licensed NSW builder since 2008. New builds, waterfront homes, renovations, duplexes and townhouse developments across Sydney.</p>
           </div>
           <div>
             <h4>Contact</h4>
             <div id="footerContact"></div>
+            <a href="contact.html" style="margin-top:10px;color:var(--brass-2)">Enquiry form →</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <div id="footerCompany"></div>
           </div>
           <div>
             <h4>Projects</h4>
@@ -350,11 +351,12 @@
             <a href="#studio">Studio</a>
             <a href="#services">Services</a>
             <a href="#process">Process</a>
+            <a href="contact.html">Contact</a>
             <a href="#top">Back to top</a>
           </div>
         </div>
         <div class="cta__bottom">
-          <span>© <span id="year"></span> Intricon. <span id="footerLicence"></span></span>
+          <span>© <span id="year"></span> Intricon Pty Ltd. <span id="footerLicence"></span></span>
           <span>Site components adapted from <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a>.</span>
         </div>
       </div>
@@ -370,10 +372,11 @@
     <a href="#studio" data-section="studio">Studio</a>
     <a href="#services" data-section="services">Services</a>
     <a href="#process" data-section="process">Process</a>
-    <a href="#contact" data-section="contact">Contact</a>
+    <a href="contact.html" data-section="contact">Contact</a>
   </nav>
 
   <script src="assets/js/projects.js"></script>
+  <script src="assets/js/dims.js"></script>
   <script src="assets/js/shared.js"></script>
   <script src="assets/js/home.js"></script>
 </body>

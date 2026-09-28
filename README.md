@@ -8,17 +8,23 @@ web host (Netlify, Vercel, GitHub Pages, cPanel, S3 — anything that serves fil
 intricon-site/
 ├─ index.html                 homepage (non-conventional editorial layout)
 ├─ project.html               project page — renders any job from ?p=<id>
+├─ contact.html               contact page with the enquiry form
+├─ publish.sh                 one command to push changes live (GitHub Pages)
 ├─ README.md                  this file
 ├─ ATTRIBUTIONS.md            21st.dev components that were ported
 └─ assets/
    ├─ css/main.css            all styling
    ├─ js/projects.js          ★ THE DATA FILE — company details + every project
-   ├─ js/shared.js            preloader, cursor, menu, lightbox, marquee…
+   ├─ js/dims.js              generated: pixel size of every photo (tall/wide tiles)
+   ├─ js/shared.js            preloader, cursor, menu, lightbox, marquee, footer…
    ├─ js/home.js              homepage effects
    ├─ js/project.js           project page renderer
-   └─ img/
-      └─ beach-st/            25 Beach Street photos (xl / md / sm sizes)
+   ├─ js/contact.js           enquiry form (FormSubmit) + fallbacks
+   └─ img/<project-id>/       photos for each job (xl / md / sm sizes)
 ```
+
+Projects currently in the site: 25 Tennyson Point, Cronulla (two homes), Bellevue Hill,
+Greenacre, Picnic Point, Georges Hall, Milperra, Yagoona, St Marys.
 
 ## Previewing locally
 
@@ -33,22 +39,17 @@ then open <http://localhost:8765>.
 
 ## Adding a new job
 
-1. **Export photos** from your camera/photographer at three sizes and put them in
-   `assets/img/<project-id>/xl`, `/md` and `/sm`
-   (roughly 2000 px, 1200 px and 480 px on the long edge). Name them
-   `<project-id>-01.jpg`, `<project-id>-02.jpg`, … in whatever order you like.
-
-   On a Mac, `sips` does this without any extra software:
+1. **Add the photos.** Put the originals in a folder, then run the helper
+   script (it resizes to three sizes, rotates phone photos the right way up,
+   and strips GPS/EXIF data so no client address leaks onto the web):
 
    ```bash
-   cd "folder-with-originals"
-   D=../intricon-site/assets/img/hillside-house; mkdir -p $D/xl $D/md $D/sm; i=0
-   for f in *.jpg; do i=$((i+1)); n=$(printf "%02d" $i)
-     sips -Z 2000 -s format jpeg -s formatOptions 80 "$f" --out "$D/xl/hillside-house-$n.jpg"
-     sips -Z 1200 -s format jpeg -s formatOptions 78 "$f" --out "$D/md/hillside-house-$n.jpg"
-     sips -Z 480  -s format jpeg -s formatOptions 72 "$f" --out "$D/sm/hillside-house-$n.jpg"
-   done
+   cd intricon-site && python3 tools/add-photos.py "/path/to/Photos Hillside House" hillside-house
    ```
+
+   That creates `assets/img/hillside-house/{xl,md,sm}/hillside-house-01.jpg …`
+   in filename order, writes `mapping.txt` so you can see which original became
+   which number, and refreshes `assets/js/dims.js`.
 
 2. **Open `assets/js/projects.js`**, copy one of the placeholder entries
    (`project-two`, …), and fill it in:
@@ -60,19 +61,34 @@ then open <http://localhost:8765>.
    - `highlights` and `trail` only matter for the project shown on the homepage
      (the first entry in the list).
 
-3. Save. The homepage index, overlay menu, footer, project page and
-   next/previous links all update automatically.
+3. Save and run `./publish.sh "Added Hillside House"`. The homepage index,
+   the horizontal strip, overlay menu, footer, project page and next/previous
+   links all update automatically.
 
 To reorder projects, reorder the entries. To keep a job in the navigation
 before its photos are ready, leave it as `status: "coming-soon"`.
 
 ## Company details, counters, testimonials
 
-- Contact details, licence number and the homepage counters live at the top of
-  `assets/js/projects.js` (`window.INTRICON.company`).
-- Testimonials are the `TESTIMONIALS` array near the bottom of `assets/js/home.js`.
+- Company details (ABN, licence, phone, email, established date) live at the top
+  of `assets/js/projects.js` (`window.INTRICON.company`) and flow into the
+  footer, the menu and the contact page. The homepage counters are computed
+  from the data (years since 2008, projects, photos).
+- Testimonials are the `TESTIMONIALS` array in `assets/js/home.js`.
   The three included are samples and are labelled as such on the page.
 - The "Studio", "Services" and "Process" copy is plain HTML in `index.html`.
+
+## The contact form
+
+`contact.html` posts to [FormSubmit](https://formsubmit.co), a free service
+that forwards submissions to **tony@intricon.com.au** with no server and no
+account. One-time setup: the first time the form is submitted, FormSubmit
+emails that address with an *Activate form* link. Click it once and every
+later submission arrives as a normal email (subject "New enquiry from the
+Intricon website"). If a submission cannot be sent from the visitor's browser,
+the page falls back to opening their email app with the message pre-filled.
+
+To change the destination address, edit `email` in `assets/js/projects.js`.
 
 ## Notes
 

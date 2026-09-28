@@ -1,0 +1,16 @@
+st-marys-01.jpg <- 617d1709-e595-41b5-a029-42f5dd732d7f.jpg
+st-marys-02.jpg <- IMG_4276.jpeg
+st-marys-03.jpg <- IMG_4277.jpeg
+st-marys-04.jpg <- IMG_4278.jpeg
+st-marys-05.jpg <- IMG_4294.jpeg
+st-marys-06.jpg <- IMG_4295.jpeg
+st-marys-07.jpg <- IMG_4296.jpeg
+st-marys-08.jpg <- IMG_4297.jpeg
+st-marys-09.jpg <- IMG_4298.jpeg
+st-marys-10.jpg <- IMG_4299.jpeg
+st-marys-11.jpg <- IMG_4300.jpeg
+st-marys-12.jpg <- IMG_4301.jpeg
+st-marys-13.jpg <- IMG_4304.jpeg
+st-marys-14.jpg <- IMG_4305.jpeg
+st-marys-15.jpg <- IMG_4306.jpeg
+st-marys-16.jpg <- df1447c5-6ac8-4540-bc56-727125638b03.jpg

@@ -1,25 +1,32 @@
 /* =====================================================================
    INTRICON — homepage behaviour
    Image trail hero · flip words · project index with floating preview
-   pinned horizontal gallery · word-by-word manifesto · counters
+   pinned horizontal strip · word-by-word manifesto · counters
    tracing-beam timeline · testimonials · text hover fill · tubelight dock
    ===================================================================== */
 (function () {
   "use strict";
-  var D = window.INTRICON, U = D.util, $ = U.$, $$ = U.$$;
-  var beach = D.projects[0];
-  var capOf = {};
-  beach.chapters.forEach(function (c) { c.images.forEach(function (im) { capOf[im.n] = { cap: im.cap, chapter: c.title }; }); });
+  var D = window.INTRICON, U = D.util, $ = U.$, $$ = U.$$, co = D.company;
+  var feat = D.projects[0]; // featured project (first in the list)
+  var live = D.projects.filter(function (p) { return p.status === "complete"; });
 
-  /* ---------- Hero: cursor image trail ---------- */
+  /* ---------- Hero: cursor image trail, leafing through every project ---------- */
   function heroTrail() {
     var host = $("#heroTrail"), hero = $(".hero");
     if (!host || !hero || U.reduce) return;
-    var list = beach.trail.length ? beach.trail : [beach.cover];
-    var srcs = list.map(function (n) { return D.img(beach, n, "md"); });
-    // warm the cache after the preloader so the first spawns are instant
+    // interleave: first trail image of each project, then the second of each, and so on
+    var srcs = [], round = 0, more = true;
+    while (more) {
+      more = false;
+      live.forEach(function (p) {
+        var list = p.trail && p.trail.length ? p.trail : [p.cover];
+        if (list[round] !== undefined) { srcs.push(D.img(p, list[round], "md")); more = true; }
+      });
+      round++;
+    }
+    if (!srcs.length) return;
     setTimeout(function () { srcs.forEach(function (s) { var i = new Image(); i.src = s; }); }, 900);
-    var idx = 0, lastX = -999, lastY = -999, live = 0, MAX = 14, GAP = 96;
+    var idx = 0, lastX = -999, lastY = -999, count = 0, MAX = 14, GAP = 96;
     function spawn(x, y) {
       var img = document.createElement("img");
       img.src = srcs[idx % srcs.length]; idx++;
@@ -27,9 +34,9 @@
       img.style.left = x + "px"; img.style.top = y + "px";
       img.style.setProperty("--rot", (Math.random() * 16 - 8).toFixed(1) + "deg");
       img.style.zIndex = String(1000 + idx);
-      host.appendChild(img); live++;
-      img.addEventListener("animationend", function () { img.remove(); live--; });
-      if (live > MAX) { var first = host.firstElementChild; if (first) { first.remove(); live--; } }
+      host.appendChild(img); count++;
+      img.addEventListener("animationend", function () { img.remove(); count--; });
+      if (count > MAX) { var first = host.firstElementChild; if (first) { first.remove(); count--; } }
     }
     if (U.fine) {
       hero.addEventListener("mousemove", function (e) {
@@ -39,14 +46,13 @@
         lastX = x; lastY = y; spawn(x, y);
       }, { passive: true });
     } else {
-      // touch devices: a slow, automatic drift so the hero still feels alive
-      var t = 0, timer = setInterval(function () {
+      var t = 0;
+      setInterval(function () {
         if (!document.body.classList.contains("is-ready")) return;
         var r = hero.getBoundingClientRect();
         if (r.bottom < 0) return;
         t += 0.9;
-        var x = r.width * (0.5 + 0.38 * Math.sin(t * 0.9)), y = r.height * (0.45 + 0.3 * Math.sin(t * 1.7 + 1));
-        spawn(x, y);
+        spawn(r.width * (0.5 + 0.38 * Math.sin(t * 0.9)), r.height * (0.45 + 0.3 * Math.sin(t * 1.7 + 1)));
       }, 1100);
     }
   }
@@ -56,8 +62,7 @@
     var h = $("#heroTitle"); if (!h) return;
     var txt = h.textContent.trim();
     h.innerHTML = txt.split("").map(function (ch, i) {
-      var cls = ch === "O" ? ' class="o"' : "";
-      return '<span' + cls + ' style="animation-delay:' + (0.05 + i * 0.06) + 's">' + ch + '</span>';
+      return '<span' + (ch === "O" ? ' class="o"' : "") + ' style="animation-delay:' + (0.05 + i * 0.06) + 's">' + ch + '</span>';
     }).join("");
   }
 
@@ -84,21 +89,20 @@
     if (!list) return;
     list.innerHTML = D.projects.map(function (p, i) {
       var soon = p.status !== "complete";
+      var photos = D.photoCount(p);
       var meta = soon
         ? '<span class="tag"><i></i>Coming soon</span><span>' + p.subtitle + '</span>'
-        : '<b>' + p.subtitle + '</b><span>' + p.location + ' · ' + p.year + '</span>';
-      return '<a class="index__row' + (soon ? " index__row--soon" : "") + '" href="project.html?p=' + p.id + '" data-i="' + i + '" data-cursor="view" data-cursor-label="' + (soon ? "Preview" : "Open") + '">' +
+        : '<span class="pill">' + p.type + '</span><b>' + p.subtitle + '</b><span>' + p.location.replace(", NSW", "") + ' · ' + photos + ' photo' + (photos === 1 ? "" : "s") + '</span>';
+      return '<a class="index__row' + (soon ? " index__row--soon" : "") + '" href="project.html?p=' + p.id + '" data-i="' + i + '" data-cursor="view" data-cursor-label="Open">' +
         '<span class="index__num">' + String(i + 1).padStart(2, "0") + '</span>' +
         '<span class="index__title">' + p.title + '</span>' +
         '<span class="index__meta">' + meta + '<svg class="index__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M8 7h9v9"/></svg></span>' +
         '</a>';
     }).join("");
+    var lede = $("#workLede");
+    if (lede) lede.textContent = D.projects.length + " completed projects across Sydney, from waterfront homes to duplex and townhouse developments. Hover a project to preview it, click to open the full photo record.";
     if (!prev || !U.fine) return;
-    // one <img> per project, swapped on hover; the frame lerps toward the cursor
-    prev.innerHTML = D.projects.map(function (p) {
-      var src = p.cover === null ? D.placeholder(p.title + " — photos coming soon", p.accent, 1200, 900) : D.img(p, p.cover, "md");
-      return '<img src="' + src + '" alt="" />';
-    }).join("");
+    prev.innerHTML = D.projects.map(function (p) { return '<img src="' + D.thumb(p, "md") + '" alt="" />'; }).join("");
     var imgs = $$("img", prev);
     var mx = 0, my = 0, x = 0, y = 0, on = false, raf;
     function loop() {
@@ -118,26 +122,20 @@
     list.addEventListener("mouseleave", function () { on = false; prev.classList.remove("is-on"); });
   }
 
-  /* ---------- Pinned horizontal gallery ---------- */
+  /* ---------- Pinned horizontal strip: one frame per project ---------- */
+  var WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
   function hscroll() {
     var sec = $("#highlights"), pin = $(".hscroll__pin", sec), track = $("#hscrollTrack"), bar = $("#hscrollBar"), count = $("#hscrollCount");
     if (!sec || !track) return;
-    var nums = beach.highlights;
-    var html = '<div class="hscroll__intro"><span class="eyebrow">Latest project</span><h2 class="display" data-cut>' + beach.title + ' <span class="serif">highlights</span></h2><p class="muted">' + beach.tagline + ' Scroll to move through the strip.</p><a class="btn magnetic" href="project.html?p=' + beach.id + '"><i class="btn__dot"></i><span>Open the project</span></a></div>';
-    nums.forEach(function (n, i) {
-      var c = capOf[n] || { cap: "", chapter: "" };
-      var tall = (i === 2 || i === 5) ? " hscroll__item--tall" : "";
-      html += '<figure class="hscroll__item' + tall + '" data-cursor="view" data-i="' + i + '"><figure><img src="' + D.img(beach, n, "md") + '" alt="' + c.cap + '" loading="lazy" /></figure><figcaption><span>' + c.chapter + '</span><b>' + String(i + 1).padStart(2, "0") + '</b></figcaption></figure>';
+    var n = live.length, word = WORDS[n] || String(n);
+    var html = '<div class="hscroll__intro"><span class="eyebrow">Across Sydney</span><h2 class="display" data-cut>' + word.charAt(0).toUpperCase() + word.slice(1) + ' projects, <span class="serif">one standard.</span></h2><p class="muted">From the harbour to the river to the bay, and the suburbs in between. Scroll to move along the strip; click a frame to open the project.</p><a class="btn magnetic" href="#work"><i class="btn__dot"></i><span>The full index</span></a></div>';
+    live.forEach(function (p, i) {
+      var portrait = D.isPortrait(p, p.cover);
+      html += '<a class="hscroll__item' + (portrait ? " hscroll__item--tall" : "") + '" href="project.html?p=' + p.id + '" data-cursor="view" data-cursor-label="Open" data-i="' + i + '"><figure><img src="' + D.cover(p, "md") + '" alt="' + p.title + '" loading="lazy" /></figure><figcaption><span>' + p.title + ' — ' + p.subtitle + '</span><b>' + String(i + 1).padStart(2, "0") + '</b></figcaption></a>';
     });
-    html += '<div class="hscroll__end"><h3 class="display" data-cut>Twenty-eight photos, <span class="serif">six rooms.</span></h3><p class="muted">The full record of the build, room by room, with captions.</p><a class="btn btn--solid magnetic" href="project.html?p=' + beach.id + '"><span>See all photos</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>';
+    html += '<div class="hscroll__end"><h3 class="display" data-cut>Something <span class="serif">to build?</span></h3><p class="muted">Tell us about the site and the drawings you have. We reply personally, usually within a business day.</p><a class="btn btn--solid magnetic" href="contact.html"><span>Start a conversation</span><svg class="btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a></div>';
     track.innerHTML = html;
     var items = $$(".hscroll__item", track);
-    items.forEach(function (it) {
-      it.addEventListener("click", function () {
-        var all = nums.map(function (n) { var c = capOf[n] || {}; return { src: D.img(beach, n, "xl"), cap: c.cap }; });
-        D.lightbox.open(all, +it.getAttribute("data-i"));
-      });
-    });
     var mobile = function () { return !U.fine || innerWidth <= 720; };
     if (mobile()) {
       items.forEach(function (i) { i.classList.add("is-vis"); });
@@ -157,7 +155,7 @@
       var p = U.clamp((scrollY - top) / (h - innerHeight), 0, 1);
       target = -p * max;
       if (bar) bar.style.transform = "scaleX(" + p + ")";
-      if (count) count.textContent = String(Math.min(nums.length, Math.floor(p * nums.length) + 1)).padStart(2, "0") + " / " + String(nums.length).padStart(2, "0");
+      if (count) count.textContent = String(Math.min(n, Math.floor(p * n) + 1)).padStart(2, "0") + " / " + String(n).padStart(2, "0");
       if (!raf) raf = requestAnimationFrame(tick);
     }
     function tick() {
@@ -176,7 +174,6 @@
   /* ---------- Manifesto: word-by-word reveal tied to scroll ---------- */
   function revealWords() {
     var el = $("#revealWords"); if (!el) return;
-    // wrap each word (keeping <em> wrappers)
     function wrap(node) {
       Array.prototype.slice.call(node.childNodes).forEach(function (n) {
         if (n.nodeType === 3) {
@@ -203,11 +200,20 @@
     window.addEventListener("scroll", upd, { passive: true }); window.addEventListener("resize", upd); upd();
   }
 
-  /* ---------- Stats counters ---------- */
+  /* ---------- Stats: computed from the data ---------- */
   function stats() {
     var box = $("#stats"); if (!box) return;
-    box.innerHTML = D.company.stats.map(function (s) {
-      return '<div class="stat"><div class="stat__value"><span data-count="' + s.value + '">0</span><sup>' + s.suffix + '</sup></div><div class="stat__label">' + s.label + '</div></div>';
+    var photos = live.reduce(function (t, p) { return t + D.photoCount(p); }, 0);
+    var years = new Date().getFullYear() - co.established;
+    var list = [
+      { value: years, suffix: "+", label: "Years building, since " + co.established },
+      { value: live.length, suffix: "", label: "Projects showcased" },
+      { value: photos, suffix: "", label: "Photos in the archive" },
+      { text: co.licence, label: "NSW builder's licence" },
+    ];
+    box.innerHTML = list.map(function (s) {
+      var val = s.text !== undefined ? '<span class="stat__text">' + s.text + '</span>' : '<span data-count="' + s.value + '">0</span><sup>' + s.suffix + '</sup>';
+      return '<div class="stat"><div class="stat__value">' + val + '</div><div class="stat__label">' + s.label + '</div></div>';
     }).join("");
     var nums = $$("[data-count]", box);
     function run(el) {
@@ -225,8 +231,7 @@
     var tl = $("#timeline"), beam = $("#timelineBeam"); if (!tl) return;
     var steps = $$(".step", tl);
     function upd() {
-      var r = tl.getBoundingClientRect();
-      var line = innerHeight * 0.68;
+      var r = tl.getBoundingClientRect(), line = innerHeight * 0.68;
       var p = U.clamp((line - r.top) / r.height, 0, 1);
       if (beam) beam.style.transform = "scaleY(" + p + ")";
       steps.forEach(function (s) { s.classList.toggle("is-on", s.getBoundingClientRect().top < line); });
@@ -236,15 +241,15 @@
 
   /* ---------- Testimonials ---------- */
   var TESTIMONIALS = [
-    // Sample quotes — replace with real client words (and, if you like, real client photos).
-    { quote: "Every trade on site knew the drawings better than we did. The stair alone would have been enough — it's the first thing every visitor touches.", name: "Owners, 25 Beach Street", role: "Waterfront new build · 2025", img: 12 },
-    { quote: "We were warned that a build this detailed would run late. Intricon handed over on the program they gave us at the estimate, with a house that felt finished on day one.", name: "Sample client", role: "Replace with a real quote", img: 17 },
-    { quote: "The weekly photo reports meant we never had to ask what was happening. When we did have a question, the director answered it himself, usually from site.", name: "Sample client", role: "Replace with a real quote", img: 10 },
+    // Sample quotes — replace with real client words. `p` is a project id, `img` a photo number from that project.
+    { quote: "Every trade on site knew the drawings better than we did. The stair alone would have been enough — it's the first thing every visitor touches.", name: "Sample client", role: "Replace with a real quote", p: "tennyson-pt", img: 12 },
+    { quote: "We were warned that a build this detailed would run late. Intricon handed over on the program they gave us at the estimate, with a house that felt finished on day one.", name: "Sample client", role: "Replace with a real quote", p: "cronulla", img: 64 },
+    { quote: "The weekly photo reports meant we never had to ask what was happening. When we did have a question, the director answered it himself, usually from site.", name: "Sample client", role: "Replace with a real quote", p: "bellevue-hill", img: 14 },
   ];
   function testimonials() {
     var stack = $("#testiStack"), q = $("#testiQuote"), nm = $("#testiName"), rl = $("#testiRole");
     if (!stack || !q) return;
-    stack.innerHTML = TESTIMONIALS.map(function (t) { return '<figure><img src="' + D.img(beach, t.img, "md") + '" alt="" loading="lazy" /></figure>'; }).join("");
+    stack.innerHTML = TESTIMONIALS.map(function (t) { var p = D.find(t.p).project; return '<figure><img src="' + D.img(p, t.img, "md") + '" alt="" loading="lazy" /></figure>'; }).join("");
     var figs = $$("figure", stack), i = 0, timer, first = true;
     function render() {
       var t = TESTIMONIALS[i];
@@ -295,8 +300,8 @@
     function onScroll() {
       if (!wrap.classList.contains("is-curtain") || !inner) return;
       var r = wrap.getBoundingClientRect();
-      var p = U.clamp((innerHeight - r.top) / r.height, 0, 1); // 0 = footer just entering, 1 = fully revealed
-      inner.style.setProperty("--lift", ((1 - p) * -60).toFixed(1) + "px"); // subtle parallax as it is uncovered
+      var p = U.clamp((innerHeight - r.top) / r.height, 0, 1);
+      inner.style.setProperty("--lift", ((1 - p) * -60).toFixed(1) + "px");
     }
     var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(measure, 200); });
     window.addEventListener("load", measure); window.addEventListener("scroll", onScroll, { passive: true });
@@ -304,10 +309,10 @@
     measure(); onScroll();
   }
 
-  /* ---------- Scroll-velocity marquee: speed and direction follow the scroll ---------- */
+  /* ---------- Scroll-velocity marquee ---------- */
   function velocityMarquee() {
     var track = $("#marqueeBig"); if (!track || U.reduce) return;
-    var x = 0, last = scrollY, lastT = performance.now(), vel = 0, dir = 1, base = 70; // px per second at rest
+    var x = 0, last = scrollY, lastT = performance.now(), vel = 0, dir = 1, base = 70;
     function frame(now) {
       var dt = Math.min((now - lastT) / 1000, 0.05); lastT = now;
       var y = scrollY, sv = dt > 0 ? (y - last) / dt : 0; last = y;
@@ -322,14 +327,13 @@
     requestAnimationFrame(frame);
   }
 
-  /* ---------- SVG text hover effect: reveal mask follows the cursor ---------- */
+  /* ---------- SVG text hover effect ---------- */
   function textHover() {
     var svg = $("#txtfx"), grad = $("#txtReveal"); if (!svg || !grad || !U.fine) return;
     var a = svg.closest("a");
     a.addEventListener("mousemove", function (e) {
       var r = svg.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width * 1200, y = (e.clientY - r.top) / r.height * 230;
-      grad.setAttribute("cx", x.toFixed(1)); grad.setAttribute("cy", y.toFixed(1));
+      grad.setAttribute("cx", ((e.clientX - r.left) / r.width * 1200).toFixed(1)); grad.setAttribute("cy", ((e.clientY - r.top) / r.height * 230).toFixed(1));
     });
     a.addEventListener("mouseleave", function () { grad.setAttribute("cx", "-1000"); grad.setAttribute("cy", "-1000"); });
   }
@@ -346,14 +350,14 @@
 
   /* ---------- Misc ---------- */
   function misc() {
-    var bi = $("#bentoImg"); if (bi) bi.src = D.img(beach, 1, "md");
-    var li = $("#lensImg"); if (li) li.src = D.img(beach, 1, "xl");
+    var bi = $("#bentoImg"); if (bi) bi.src = D.img(feat, 1, "md");
+    var li = $("#lensImg"); if (li) li.src = D.img(feat, 1, "xl");
+    var latest = $("#latestBtn"); if (latest) { latest.href = "project.html?p=" + feat.id; $("span", latest).textContent = "Latest: " + feat.title; }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     heroTitle(); heroTrail(); flipWords(); projectIndex(); hscroll(); revealWords(); stats(); timeline(); testimonials(); dock(); misc();
     curtain(); velocityMarquee(); textHover(); lens();
-    // reveal + magnetic for dynamically-inserted content
     D.observeReveal(); if (D.magnetic) D.magnetic();
   });
 })();

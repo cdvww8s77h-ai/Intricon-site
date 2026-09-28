@@ -50,7 +50,9 @@
       if (t < 1) requestAnimationFrame(frame);
       else finish();
     }
+    var done = false;
     function finish() {
+      if (done) return; done = true;
       setTimeout(function () {
         el.classList.add("is-done");
         document.body.classList.remove("is-locked");
@@ -60,6 +62,7 @@
       }, 180);
     }
     requestAnimationFrame(frame);
+    setTimeout(function () { if (count) count.textContent = 100; if (bar) bar.style.width = "100%"; finish(); }, dur + 2500); // never trap the page if frames stall
   }
 
   /* ---------- Custom cursor: dot + lagging ring + contextual label ---------- */
@@ -146,37 +149,44 @@
     }
     btn.addEventListener("click", function () { set(!open); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) set(false); });
-    $$("a", nav).forEach(function (a) {
-      a.addEventListener("click", function () { setTimeout(function () { set(false); }, 120); });
+    // main links (generated so every page gets the same menu)
+    var ml = $("#menuLinks");
+    if (ml && !ml.children.length) {
+      var home = !!document.getElementById("work"), pre = home ? "" : "index.html";
+      var feat = D.projects[0];
+      var items = [
+        ["Work", pre + "#work", D.img(feat, 12, "md")],
+        ["Studio", pre + "#studio", D.img(feat, 10, "md")],
+        ["Services", pre + "#services", D.img(feat, 5, "md")],
+        ["Process", pre + "#process", D.img(feat, 0, "md")],
+        ["Contact", "contact.html", D.img(feat, 27, "md")],
+      ];
+      ml.innerHTML = items.map(function (it, i) { return '<li><a href="' + it[1] + '" data-src="' + it[2] + '"><small>0' + (i + 1) + '</small>' + it[0] + '</a></li>'; }).join("");
+    }
+    function hookBg(a) {
       a.addEventListener("mouseenter", function () {
-        var n = a.getAttribute("data-bg");
+        var src = a.getAttribute("data-src");
         if (!bg) return;
-        if (n === null || n === "") { bg.classList.remove("is-on"); return; }
-        var beach = D.projects[0];
-        bg.style.backgroundImage = "url('" + D.img(beach, n, "md") + "')";
+        if (!src) { bg.classList.remove("is-on"); return; }
+        bg.style.backgroundImage = "url('" + src + "')";
         bg.classList.add("is-on");
       });
+    }
+    $$("a", nav).forEach(function (a) {
+      a.addEventListener("click", function () { setTimeout(function () { set(false); }, 120); });
+      hookBg(a);
     });
     // side lists
     var mp = $("#menuProjects");
     if (mp) {
-      mp.innerHTML = D.projects.map(function (p, i) {
-        var right = p.status === "complete" ? p.year : "Coming soon";
-        return '<li><a href="project.html?p=' + p.id + '" data-bg="' + (p.cover === null ? "" : p.cover) + '">' + p.title + '</a><span>' + right + '</span></li>';
+      mp.innerHTML = D.projects.map(function (p) {
+        var right = p.status === "complete" ? p.location.replace(", NSW", "") : "Coming soon";
+        return '<li><a href="project.html?p=' + p.id + '" data-src="' + D.thumb(p, "md") + '">' + p.title + '</a><span>' + right + '</span></li>';
       }).join("");
-      $$("a", mp).forEach(function (a) {
-        a.addEventListener("mouseenter", function () {
-          var n = a.getAttribute("data-bg");
-          if (!bg) return;
-          if (!n) { bg.classList.remove("is-on"); return; }
-          var p = D.projects.find(function (x) { return a.getAttribute("href").indexOf(x.id) > -1; });
-          bg.style.backgroundImage = "url('" + D.img(p, n, "md") + "')";
-          bg.classList.add("is-on");
-        });
-      });
+      $$("a", mp).forEach(function (a) { hookBg(a); a.addEventListener("click", function () { setTimeout(function () { set(false); }, 120); }); });
     }
     var mc = $("#menuContact");
-    if (mc) mc.innerHTML = '<a href="mailto:' + co.email + '">' + co.email + '</a><br><a href="tel:' + co.phone.replace(/\s+/g, "") + '">' + co.phone + '</a><br>' + co.address;
+    if (mc) mc.innerHTML = '<a href="mailto:' + co.email + '">' + co.email + '</a><br><a href="tel:' + co.phoneIntl + '">' + co.phone + '</a><br>' + co.address + '<br><span style="font-size:12px;color:var(--fg-3)">ABN ' + co.abn + ' · Lic. ' + co.licence + '</span>';
   }
 
   /* ---------- Scroll progress bar ---------- */
@@ -404,20 +414,45 @@
   D.lightbox = { open: open, close: close, go: go };
 
   /* ---------- Footer/common text ---------- */
+  function contactLinks() {
+    return '<a href="tel:' + co.phoneIntl + '">' + co.phone + '</a><a href="mailto:' + co.email + '">' + co.email + '</a>' +
+      (co.instagram ? '<a href="' + co.instagram + '" target="_blank" rel="noopener">Instagram</a>' : "") +
+      '<span class="muted" style="font-size:14px;display:block">' + co.address + '</span>';
+  }
+  function companyLines() {
+    return '<span style="display:block;font-size:14px;line-height:1.9">' + co.legalName + '</span>' +
+      '<span class="muted" style="display:block;font-size:14px;line-height:1.9">ABN ' + co.abn + '</span>' +
+      '<span class="muted" style="display:block;font-size:14px;line-height:1.9">' + co.licenceLabel + '</span>' +
+      '<span class="muted" style="display:block;font-size:14px;line-height:1.9">Established ' + co.establishedLabel + '</span>';
+  }
   function common() {
     var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
-    var lic = $("#footerLicence"); if (lic) lic.textContent = co.licence;
-    var fc = $("#footerContact");
-    if (fc) fc.innerHTML = '<a href="mailto:' + co.email + '">' + co.email + '</a><a href="tel:' + co.phone.replace(/\s+/g, "") + '">' + co.phone + '</a><a href="' + co.instagram + '" target="_blank" rel="noopener">Instagram</a><span class="muted" style="font-size:14px">' + co.address + '</span>';
+    var lic = $("#footerLicence"); if (lic) lic.textContent = "ABN " + co.abn + " · " + co.licenceLabel + ".";
+    var fc = $("#footerContact"); if (fc) fc.innerHTML = contactLinks();
+    var fco = $("#footerCompany"); if (fco) fco.innerHTML = companyLines();
     var fp = $("#footerProjects");
     if (fp) fp.innerHTML = D.projects.map(function (p) { return '<a href="project.html?p=' + p.id + '">' + p.title + (p.status !== "complete" ? ' <span class="muted">(soon)</span>' : "") + '</a>'; }).join("");
-    var mail = $("#ctaMail"); if (mail) mail.href = "mailto:" + co.email + "?subject=New%20build%20enquiry";
+    var mail = $("#ctaMail"); if (mail) mail.href = "contact.html";
+    // compact footer for project / contact pages
+    var sf = $("#siteFooter");
+    if (sf) {
+      sf.outerHTML =
+        '<footer class="site-footer"><div class="container">' +
+          '<div class="site-footer__grid">' +
+            '<div><a class="brand" href="index.html"><span class="brand__mark"><i></i></span><span>' + co.name + '</span></a><p style="margin-top:16px">' + co.tagline + ' Licensed NSW builder since ' + co.established + ', working across Sydney.</p></div>' +
+            '<div><h4>Contact</h4>' + contactLinks() + '</div>' +
+            '<div><h4>Company</h4>' + companyLines() + '</div>' +
+            '<div><h4>Navigate</h4><a href="index.html#work">Work</a><a href="index.html#studio">Studio</a><a href="index.html#services">Services</a><a href="index.html#process">Process</a><a href="contact.html">Contact</a></div>' +
+          '</div>' +
+          '<div class="cta__bottom site-footer__bottom"><span>© ' + new Date().getFullYear() + ' ' + co.legalName + '.</span><span>Site components adapted from <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a>.</span></div>' +
+        '</div></footer>';
+    }
   }
 
   /* ---------- boot ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     common(); preloader(); cursor(); topbar(); clock(); menu(); progress(); marquee(); reveal(); magnetic(); spotlight(); tilt(); scrambleOnReveal(); dockLamp();
-    $$(".menu__links a, .cta__row a, .phero__back").forEach(letterSwap);
+    $$(".menu__links a, .cta__row a, .site-footer a:not(.brand), .phero__back").forEach(letterSwap);
     window.addEventListener("resize", (function () { var t; return function () { clearTimeout(t); t = setTimeout(marquee, 250); }; })());
   });
 })();

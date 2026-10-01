@@ -841,6 +841,7 @@ body.menu-open .menu__side { opacity: 1; transform: none; }
 
 /* ---------- hold intro animations until the preloader has finished ---------- */
 body:not(.is-ready) .hero__kicker,
+body:not(.is-ready) .hero__name,
 body:not(.is-ready) .hero__sub,
 body:not(.is-ready) .hero__cta,
 body:not(.is-ready) .hero__foot > *,
@@ -1046,3 +1047,13 @@ fieldset.chips { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wra
 /* Chip groups: allow the fieldset to shrink on narrow screens */
 fieldset.chips { min-width: 0; }
 .cform__foot .cform__note { flex: 1 1 240px; }
+
+/* ---------- hero: the name spelled out under the wordmark ---------- */
+.hero__name {
+  margin-top: clamp(18px, 2.6vw, 34px);
+  font-family: var(--font-display); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: clamp(15px, 2vw, 26px); line-height: 1.1; color: var(--fg);
+  opacity: 0; animation: fade-up 1s var(--ease-out) 0.8s forwards;
+}
+.hero__name .serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 1.45em; color: var(--brass-2); margin-right: 0.12em; vertical-align: -0.04em; }
+.hero__sub { margin-top: clamp(12px, 1.6vw, 20px); font-size: clamp(16px, 1.7vw, 22px); animation-delay: 1.05s; }

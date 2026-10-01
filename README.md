@@ -23,7 +23,7 @@ intricon-site/
    └─ img/<project-id>/       photos for each job (xl / md / sm sizes)
 ```
 
-Projects currently in the site: 25 Tennyson Point, Cronulla (two homes), Bellevue Hill,
+Projects currently in the site: Tennyson Point, Cronulla (two homes), Bellevue Hill,
 Greenacre, Picnic Point, Georges Hall, Milperra, Yagoona, St Marys.
 
 ## Previewing locally

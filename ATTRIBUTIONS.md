@@ -21,7 +21,7 @@ colours were mapped to the Intricon palette (stone, oak, brass).
 | Menu | Full-screen overlay with staggered links and a hover-swapped background image | [Curved Menu](https://21st.dev/@ishamsu/components/curved-menu) (structure, easing) | ishamsu |
 | Menu links, footer links | Each letter slides up and its twin slides in on hover | [Letter Swap](https://21st.dev/@danielpetho/components/letter-swap) | danielpetho |
 | Buttons | Brass dot grows to fill the pill, arrow nudges right | [Interactive Hover Button](https://21st.dev/@dillionverma/components/interactive-hover-button) | dillionverma |
-| "Latest: 25 Beach Street" button | Travelling shimmer highlight | [Shimmer Button](https://21st.dev/@dillionverma/components/shimmer-button) | dillionverma |
+| "Latest project" button in the hero | Travelling shimmer highlight | [Shimmer Button](https://21st.dev/@dillionverma/components/shimmer-button) | dillionverma |
 | Primary buttons | Pulled toward the cursor, elastic return | [Magnetic](https://21st.dev/@ibelick/components/magnetic) | ibelick |
 | Capability strip, materials strip | Seamless CSS marquee with edge fade, pauses on hover | [Marquee](https://21st.dev/@dillionverma/components/marquee) · [Infinite Moving Cards](https://21st.dev/@manuarora700/components/infinite-moving-cards) | dillionverma · manuarora700 |
 | "Let's build something that lasts" strip | Marquee speed and direction follow scroll velocity | [Scroll Based Velocity](https://21st.dev/@dillionverma/components/scroll-based-velocity) | dillionverma |

@@ -57,6 +57,7 @@
         el.classList.add("is-done");
         document.body.classList.remove("is-locked");
         document.body.classList.add("is-ready");
+        if (D.revealNow) D.revealNow();
         try { sessionStorage.setItem("intricon-seen", "1"); } catch (e) {}
         setTimeout(function () { el.remove(); }, 1100);
       }, 180);
@@ -155,11 +156,11 @@
       var home = !!document.getElementById("work"), pre = home ? "" : "index.html";
       var feat = D.projects[0];
       var items = [
-        ["Work", pre + "#work", D.img(feat, 12, "md")],
-        ["About", pre + "#about", D.img(feat, 10, "md")],
-        ["Services", pre + "#services", D.img(feat, 5, "md")],
-        ["Process", pre + "#process", D.img(feat, 0, "md")],
-        ["Contact", "contact.html", D.img(feat, 27, "md")],
+        ["Work", pre + "#work", D.img(feat, 81, "md")],
+        ["About", pre + "#about", D.img(feat, 47, "md")],
+        ["Services", pre + "#services", D.img(feat, 92, "md")],
+        ["Process", pre + "#process", D.img(feat, 31, "md")],
+        ["Contact", "contact.html", D.img(feat, 78, "md")],
       ];
       ml.innerHTML = items.map(function (it, i) { return '<li><a href="' + it[1] + '" data-src="' + it[2] + '"><small>0' + (i + 1) + '</small>' + it[0] + '</a></li>'; }).join("");
     }
@@ -234,6 +235,15 @@
     els.forEach(function (e) { if (!e.classList.contains("is-in")) io.observe(e); });
   }
   D.observeReveal = reveal;
+  /* Reveal whatever is already on screen without waiting for the observer
+     (called when the preloader curtain opens, so the top of every page animates in on cue). */
+  D.revealNow = function () {
+    $$("[data-reveal], [data-cut]").forEach(function (e) {
+      if (e.classList.contains("is-in")) return;
+      var r = e.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) e.classList.add("is-in");
+    });
+  };
 
   /* ---------- Letter Swap: wrap letters so each can slide up and reveal its twin ---------- */
   function letterSwap(el) {

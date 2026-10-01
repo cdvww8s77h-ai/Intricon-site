@@ -1020,3 +1020,29 @@ fieldset.chips { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wra
 .cform__done .btn .btn__dot { background: var(--ink); }
 .contact-page .dock a[data-section=""] { color: var(--fg-2); }
 .contact-page .dock a.is-active { color: var(--fg); }
+
+/* =====================================================================
+   Contact page fixes
+   ===================================================================== */
+/* The hidden attribute must always win, even over display:grid/flex rules
+   (the success panel and the submitted form rely on it). */
+[hidden] { display: none !important; }
+
+/* "What happens next": number in a gutter, heading and sentence stacked.
+   (Previously a 2-column grid pushed the sentence into the 32px number column.) */
+.contact-steps { gap: 20px; }
+.contact-steps li { display: block; position: relative; padding-left: 46px; }
+.contact-steps li::before { position: absolute; left: 0; top: 0; padding-top: 5px; }
+.contact-steps b { display: block; margin-bottom: 2px; }
+
+/* Facts list: room for the longer labels on one line */
+.contact-facts li { grid-template-columns: 170px 1fr; align-items: baseline; }
+@media (max-width: 480px) { .contact-facts li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* The side column is taller than most screens, so it scrolls with the page
+   instead of sticking (sticky cut off the lower half). */
+@media (min-width: 1000px) { .contact-side { position: static; } }
+
+/* Chip groups: allow the fieldset to shrink on narrow screens */
+fieldset.chips { min-width: 0; }
+.cform__foot .cform__note { flex: 1 1 240px; }
